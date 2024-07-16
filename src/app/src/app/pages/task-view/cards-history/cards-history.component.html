@@ -1,0 +1,23 @@
+<div class="">
+    <div *ngIf="history && history.length > 0; else noHistory" class="grid lg:grid-cols-3 sm:grid-cols-1 gap-4 p-4">
+        <div *ngFor="let item of history"
+            class="border border-none bg-zinc-800 rounded-md p-4 flex flex-col justify-between">
+            <div class="flex justify-between mb-2">
+                <h1 class="text-xl font-semibold">{{ item.title }}</h1>
+                <div>
+                    <button class="bg-zinc-700 px-2 py-1 rounded">{{item.priority}}</button>
+                </div>
+            </div>
+            <p class="text-gray-300">{{ item.description }}</p>
+            <div class="mt-2">
+                <p class="text-gray-300">{{item.chagesAt | date}}</p>
+            </div>
+        </div>
+    </div>
+    <ng-template #noHistory>
+        <p>No history available.</p>
+    </ng-template>
+    <ng-template #loading>
+        <p>Loading history...</p>
+    </ng-template>
+</div>
