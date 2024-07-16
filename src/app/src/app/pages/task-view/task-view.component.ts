@@ -17,7 +17,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class TaskViewComponent {
   @Input() tasks$!: Observable<Tasks[]>
-  showSlider = true;
+  showSlider = false;
 
   ontoggle() {
     console.log('toggle');
