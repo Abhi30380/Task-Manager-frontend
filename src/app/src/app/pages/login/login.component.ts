@@ -30,7 +30,9 @@ export class LoginComponent {
         localStorage.setItem('id', res.id);
         localStorage.setItem('Authorization',`bearer ${res.token}`);
         localStorage.setItem('username',res.username);
-        this.router.navigateByUrl('/alltasks');
+        this.router.navigateByUrl('/alltasks').then(() => {
+          window.location.reload();
+        });
         alert("login success");
       }
     },
