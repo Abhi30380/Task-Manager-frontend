@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, input } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { TasksService } from '../../../../../service/tasks.service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-inputdata',
   standalone: true,
-  imports: [RouterLink, FormsModule, ReactiveFormsModule],
+  imports: [RouterLink, FormsModule, ReactiveFormsModule,NgIf],
   templateUrl: './inputdata.component.html',
   styleUrl: './inputdata.component.css'
 })
@@ -36,23 +37,13 @@ export class InputdataComponent implements OnInit {
     });
   }
   userForm: FormGroup = new FormGroup({
-    title: new FormControl(''),
-    description: new FormControl(''),
-    status: new FormControl('Incomplete'),
-    priority: new FormControl('low'),
-    dueDate: new FormControl(''),
+    title: new FormControl('', Validators.required),
+  description: new FormControl('', Validators.required),
+  status: new FormControl('Incomplete'),
+  priority: new FormControl('low'),
+  dueDate: new FormControl('', Validators.required),
   })
-  // onInput() {
-  //   const inpObj = this.userForm.value;
-  //   this.server.createtasks(inpObj).subscribe((res: any) => {
-  //     if (!res.good) {
-  //       alert(res.message);
-  //     } else {
-  //       this.router.navigateByUrl('/alltasks');
-  //       alert("input success");
-  //     }
-  //   });
-  // }
+
   onInput() {
     const inpObj = this.userForm.value;
     if (this.isUpdate) {

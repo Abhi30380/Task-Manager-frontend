@@ -1,12 +1,13 @@
+import { NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink,Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink,FormsModule],
+  imports: [RouterLink,FormsModule,ReactiveFormsModule,NgIf],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -15,8 +16,13 @@ export class LoginComponent {
   constructor(private http:HttpClient,private router:Router){
     this.logObj = new Login();
   }
+  loginForm: FormGroup = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(4)]),
+  });
   onLogin(){
-    this.http.post('https://task-manager-api-rqs7.onrender.com/api/v1/login',this.logObj).subscribe((res:any)=>{
+    const formData = this.loginForm.value;
+    this.http.post('https://task-manager-api-rqs7.onrender.com/api/v1/login',formData).subscribe((res:any)=>{
       if(!res.id){
         alert(res.message);
       }else{
@@ -25,9 +31,11 @@ export class LoginComponent {
         localStorage.setItem('Authorization',`bearer ${res.token}`);
         localStorage.setItem('username',res.username);
         this.router.navigateByUrl('/alltasks');
-
         alert("login success");
       }
+    },
+    (error: any) => {
+      alert(error.error.message);
     })
   }
 }

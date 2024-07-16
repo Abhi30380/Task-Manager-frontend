@@ -1,4 +1,4 @@
-<div class="h-screen flex items-center justify-center bg-[url('/assets/images/background.jpg')]">
+<!-- <div class="h-screen flex items-center justify-center bg-[url('/assets/images/background.jpg')]">
     <div class="p-4 sm:w-full lg:w-2/6 rounded bg-zinc-900">
         <form action="">
             <div class="text-2xl font-semibold text-zinc-600 px-3 py-2 my-3">Log In</div>
@@ -10,4 +10,26 @@
             </div>
         </form>
     </div>
-</div>
+</div> -->
+<div class="h-screen flex items-center justify-center bg-[url('/assets/images/background.jpg')]">
+    <div class="p-4 sm:w-full lg:w-2/6 rounded bg-zinc-900">
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <div class="text-2xl font-semibold text-zinc-600 px-3 py-2 my-3">Log In</div>
+        <input formControlName="email" type="email" placeholder="Email" name="email" class="bg-zinc-800 px-3 py-4 my-3 w-full rounded text-white">
+        <div *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched">
+          <small class="text-red-500">Email is required</small>
+        </div>
+        <div *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched">
+          <small class="text-red-500">Invalid email</small>
+        </div>
+        <input formControlName="password" type="password" placeholder="Password" name="password" class="bg-zinc-800 p-4 my-3 w-full rounded text-white">
+        <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
+          <small class="text-red-500">Password is required</small>
+        </div>
+        <button class="bg-blue-500 text-xl font-semibold text-zinc-800 px-3 py-2 w-full my-3" [disabled]="!loginForm.valid">Log In</button>
+        <div class="text-center mt-4 text-zinc-600">
+          Don't have an account? <a routerLink="/signup" class="text-blue-500">Sign up here</a>
+        </div>
+      </form>
+    </div>
+  </div>

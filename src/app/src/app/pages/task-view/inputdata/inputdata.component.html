@@ -1,4 +1,4 @@
-<div class="bg-zinc-950 h-screen w-full relative">
+<!-- <div class="bg-zinc-950 h-screen w-full relative">
     <div class="fixed top-0 left-0 bg-zinc-950 opacity-80 h-screen w-full"></div>
     <form action="" [formGroup]="userForm">
 
@@ -53,4 +53,68 @@
             </div>
         </div>
     </form>
-</div>
+</div> -->
+<div class="bg-zinc-950 h-screen w-full relative">
+    <div class="fixed top-0 left-0 bg-zinc-950 opacity-80 h-screen w-full"></div>
+    <form [formGroup]="userForm" (ngSubmit)="onInput()">
+  
+      <div class="fixed top-0 left-0 flex justify-center items-center h-screen w-full">
+        <div class="lg:w-2/6 sm:w-full bg-zinc-900 rounded p-4 flex flex-col">
+          <div class="text-white flex justify-end m-2">
+            <a routerLink="/alltasks">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-8">
+                <path
+                  d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+              </svg>
+            </a>
+          </div>
+          <input formControlName="title" type="text" name="title" placeholder="Title" id="" class="text-white px-3 py-2 rounded bg-zinc-700">
+          <div *ngIf="userForm.get('title')?.hasError('required') && userForm.get('title')?.touched">
+            <small class="text-red-500">Title is required</small>
+          </div>
+          <textarea formControlName="description" name="description" cols="30" rows="10" placeholder="Enter you description"
+            class="text-white px-3 py-2 rounded bg-zinc-700 my-3"></textarea>
+          <div *ngIf="userForm.get('description')?.hasError('required') && userForm.get('description')?.touched">
+            <small class="text-red-500">Description is required</small>
+          </div>
+          <div class="px-3 py-2 rounded bg-zinc-700 flex flex-col text-gray-400">
+            <p class="mb-2">Status: </p>
+            <div class="flex justify-between w-full">
+              <div class="flex items-center">
+                <input formControlName="status" type="radio" id="Completed" name="status" value="Completed">
+                <label for="Completed" class="ml-1">Completed</label>
+              </div>
+              <div class="flex items-center">
+                <input formControlName="status" type="radio" id="Incomplete" name="status" value="Incomplete">
+                <label for="Incomplete" class="ml-1">In Complete</label>
+              </div>
+            </div>
+          </div>
+          <div class="px-3 py-2 rounded bg-zinc-700 flex flex-col text-gray-400 my-3">
+            <p class="mb-2">Priority: </p>
+            <div class="flex justify-between w-full">
+              <div class="">
+                <input formControlName="priority" type="radio" id="high" name="priority" value="high">
+                <label for="high" class="ml-1">high</label>
+              </div>
+              <div class="flex items-center">
+                <input formControlName="priority" type="radio" id="medium" name="priority" value="medium">
+                <label for="medium" class="ml-1">medium</label>
+              </div>
+              <div class="flex items-center">
+                <input formControlName="priority" type="radio" id="low" name="priority" value="low">
+                <label for="low" class="ml-1">low</label>
+              </div>
+            </div>
+          </div>
+          <input formControlName="dueDate" type="date" id="birthday" name="dueDate" class="bg-zinc-700 rounded text-white px-3 py-2 ">
+          <div *ngIf="userForm.get('dueDate')?.hasError('required') && userForm.get('dueDate')?.touched">
+            <small class="text-red-500">Due date is required</small>
+          </div>
+          <button class="bg-blue-400 hover:bg-blue-600 mt-4 text-white font-bold py-2 px-4 rounded">
+            Add Task
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
