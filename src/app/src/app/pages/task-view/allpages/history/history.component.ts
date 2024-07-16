@@ -9,11 +9,12 @@ import * as TasksActions from '../../../../../../store/tasks/tasks.action';
 import * as TasksSelctor from '../../../../../../store/tasks/tasks.selector'
 import { CardsHistoryComponent } from '../../cards-history/cards-history.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-history',
   standalone: true,
-  imports: [SliderComponent,CardsHistoryComponent],
+  imports: [SliderComponent,CardsHistoryComponent,NgIf],
   templateUrl: './history.component.html',
   styleUrl: './history.component.css'
 })
@@ -30,5 +31,11 @@ export class HistoryComponent implements OnInit{
         });
       }
     });
+  }
+  showSlider = false;
+
+  ontoggle() {
+    console.log('toggle');
+    this.showSlider =!this.showSlider;
   }
 }

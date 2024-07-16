@@ -1,8 +1,29 @@
-<div class="bg-zinc-950 text-white h-screen p-2">
+<!-- <div class="bg-zinc-950 text-white h-screen p-2">
     <div class="flex gap-4 h-[98vh]">
         <app-slider class="bg-zinc-900 w-1/6 border rounded-xl p-3 flex flex-col justify-between"></app-slider>
         <div class="bg-zinc-900 border rounded-xl p-3 w-5/6 grid-container max-h-screen overflow-auto">
             <app-cards-history [history]="history"></app-cards-history>
+        </div>
+    </div>
+</div> -->
+<div class="bg-zinc-950 text-white h-screen p-2">
+    <div class="flex gap-4 h-[98vh] relative">
+        <app-slider class="bg-zinc-900 w-1/6 border rounded-xl p-3 flex flex-col justify-between hidden md:flex"></app-slider>
+        <div class="border rounded bg-zinc-950 fixed top-10 left-3 md:hidden block"(click)=ontoggle()>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-8">
+                <path fill-rule="evenodd" d="M6 4.75A.75.75 0 0 1 6.75 4h10.5a.75.75 0 0 1 0 1.5H6.75A.75.75 0 0 1 6 4.75ZM6 10a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H6.75A.75.75 0 0 1 6 10Zm0 5.25a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H6.75a.75.75 0 0 1-.75-.75ZM1.99 4.75a1 1 0 0 1 1-1H3a1 1 0 0 1 1 1v.01a1 1 0 0 1-1 1h-.01a1 1 0 0 1-1-1v-.01ZM1.99 15.25a1 1 0 0 1 1-1H3a1 1 0 0 1 1 1v.01a1 1 0 0 1-1 1h-.01a1 1 0 0 1-1-1v-.01ZM1.99 10a1 1 0 0 1 1-1H3a1 1 0 0 1 1 1v.01a1 1 0 0 1-1 1h-.01a1 1 0 0 1-1-1V10Z" clip-rule="evenodd" />
+              </svg>              
+        </div>
+        <div class="bg-zinc-900 border rounded-xl p-3 md:w-5/6 w-full grid-container max-h-screen overflow-auto">
+            <app-cards-history [history]="history"></app-cards-history>
+        </div>
+        <div class="fixed inset-0 md:hidden" *ngIf="showSlider">
+            <div class="fixed top-4 right-8" (click)=ontoggle()>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-10">
+                    <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+                  </svg>                  
+            </div>
+            <app-slider class="bg-zinc-900 h-4/6 w-full border rounded-xl p-3 flex flex-col justify-between"></app-slider>
         </div>
     </div>
 </div>
