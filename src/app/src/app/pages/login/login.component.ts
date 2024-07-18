@@ -18,7 +18,7 @@ export class LoginComponent {
   }
   loginForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    password: new FormControl('', [Validators.required]),
   });
   onLogin(){
     const formData = this.loginForm.value;
