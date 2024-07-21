@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TaskViewComponent } from '../../task-view.component';
-import { Observable } from 'rxjs';
+import { Observable, filter, map } from 'rxjs';
 import { Tasks } from '../../../../../../models/tasks';
 import { TasksState } from '../../../../../../store/tasks/tasks.reducer';
 import { TasksService } from '../../../../../../service/tasks.service';
@@ -15,15 +15,14 @@ import { Store } from '@ngrx/store';
   styleUrl: './inprogress.component.css'
 })
 export class InprogressComponent {
-  tasks$!:Observable<Tasks[]>;
   error!: Observable<String | null>;
-
-  constructor(private store: Store<{tasksState: TasksState}>,private service: TasksService){
-    console.log("hi i am on all tasks");
-    this.store.dispatch(TasksActions.loadTasks({ sortBy: 'priority', sortOrder: 'asc' }));
-    this.tasks$ = this.store.select(TasksSelctor.selectAllTasks); 
+  tasks$!: Observable<Tasks[]>;
+  constructor(private store: Store<{ tasks: Tasks[] }>) {
+    this.store.dispatch(TasksActions.loadTasks());
+    this.tasks$ = this.store.select(TasksSelctor.selectPrioritySortedTasks).pipe(
+      filter(tasks => tasks !== null),
+      map(tasks => tasks as Tasks[])
+    );
     this.error = this.store.select(TasksSelctor.selectTasksError);
-  }
-  ngOnInit(): void {
   }
 }

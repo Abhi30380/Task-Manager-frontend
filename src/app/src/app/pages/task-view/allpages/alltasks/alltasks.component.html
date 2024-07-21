@@ -1,13 +1,13 @@
 <app-task-view [tasks$]="tasks$"></app-task-view>
-<!-- <div *ngFor="let task of tasks">
-    <h2>{{ task.title }}</h2>
-    <p>{{ task.description }}</p>
-    <p>Status: {{ task.status }}</p>
-    <p>Priority: {{ task.priority }}</p>
-    <p>Due Date: {{ task.dueDate }}</p>
-    <ul>
-      <li *ngFor="let history of task.history">
-        {{ history._id }}
-      </li>
-    </ul>
-  </div>  -->
+<!-- <div *ngFor="let task of (tasks$ | async)">
+  <h2>{{ task.title }}</h2>
+  <p>{{ task.description }}</p>
+  <p>Status: {{ task.status }}</p>
+  <p>Priority: {{ task.priority }}</p>
+  <p>Due Date: {{ task.dueDate | date: 'MM/dd/yyyy' }}</p>
+  <ul>
+    <li *ngFor="let history of task.history">
+      {{ history._id }}
+    </li>
+  </ul>
+</div> -->

@@ -14,7 +14,7 @@ import { ngxCsv } from 'ngx-csv';
   styleUrl: './cards.component.css'
 })
 export class CardsComponent {
-  @Input() tasks$!: Observable<Tasks[]>
+  @Input() tasks$!: Observable<Tasks[]>;
   data:any[] = [];
   constructor(private server: TasksService){
   }

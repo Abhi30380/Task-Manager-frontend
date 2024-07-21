@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TaskViewComponent } from '../../task-view.component';
 import * as TasksActions from '../../../../../../store/tasks/tasks.action';
 import * as TasksSelctor from '../../../../../../store/tasks/tasks.selector'
-import { Observable, map } from 'rxjs';
+import { Observable, filter, map } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Tasks } from '../../../../../../models/tasks';
 import { TasksState } from '../../../../../../store/tasks/tasks.reducer';
@@ -17,16 +17,14 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './important.component.css'
 })
 export class ImportantComponent {
-  tasks$!:Observable<Tasks[]>;
   error!: Observable<String | null>;
-  sortedTasks$!: Observable<Tasks[]>;
-
-  constructor(private store: Store<{tasksState: TasksState}>,private service: TasksService){
-    console.log("hi i am on important tasks");
-    this.store.dispatch(TasksActions.loadTasks({ sortBy: 'status', sortOrder: 'asc' }));
-    this.tasks$ = this.store.select(TasksSelctor.selectAllTasks);
+  tasks$!: Observable<Tasks[]>;
+  constructor(private store: Store<{ tasks: Tasks[] }>) {
+    this.store.dispatch(TasksActions.loadTasks());
+    this.tasks$ = this.store.select(TasksSelctor.selectStatusSortedTasks).pipe(
+      filter(tasks => tasks !== null),
+      map(tasks => tasks as Tasks[])
+    );
     this.error = this.store.select(TasksSelctor.selectTasksError);
-  }
-  ngOnInit(): void {
   }
 }
